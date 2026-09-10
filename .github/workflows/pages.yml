@@ -60,3 +60,29 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/deploy-pages@v4
         id: deployment
+      - name: Verify the public release
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PY'
+          import json, os, time, urllib.request
+          base = os.environ['SITE_URL'].rstrip('/') + '/'
+          expected = os.environ['GITHUB_SHA']
+          for attempt in range(12):
+              try:
+                  with urllib.request.urlopen(base + 'build-info.json?v=' + expected, timeout=20) as response:
+                      assert response.status == 200
+                      info = json.load(response)
+                  assert info['version'] == '0.2.0' and info['commit'] == expected, info
+                  assert info['hosting'] == 'static' and info['serverServices'] is False
+                  with urllib.request.urlopen(base + '?v=' + expected, timeout=20) as response:
+                      assert response.status == 200
+                      html = response.read().decode('utf-8')
+                  assert 'Mireva Studio' in html and 'name="mireva-hosting" content="static"' in html
+                  print(json.dumps({'url': base, 'http': 200, **info}, indent=2))
+                  break
+              except Exception:
+                  if attempt == 11:
+                      raise
+                  time.sleep(5)
+          PY
