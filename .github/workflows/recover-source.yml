@@ -11,25 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Retrieve previously uploaded source objects
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPOSITORY: ${{ github.repository }}
+      - name: Prepare transfer dictionary
         run: |
           python3 - <<'PY'
-          import base64, hashlib, json, os, pathlib, urllib.request
-          shas = ['c175778131785ec61eae3899371bc34cd65f4e6c','2a24e2979f1c383f48e58e71957546b079be24c2','918eb4c98ad27cdc4bc1e5e85160aa0c176ca3b6','2e1ffc2d113d898b088dd68a4f10dae8a58f9540','7be6ea1d3ccb5fc992a1a6404fd30ae6cda4ce03','bf9c81a48c76f1801e6119be20a2903126ff9a76','5e2df1353a353f53931c84f736f4df4add91ee5a','1bb94f4579f94672e438e02451d8d5779a0a9db4','547959ede13632c2582f6e1f7c864f9fb66c70a8','6d601b30ac6dc1899d0ce58c936cc182865a5949','e5c60816de0cf00120b738e8a20cdd2e4612d15b','e47c432d8d08dbeb290265b72fff1d88d4c3c998']
-          out = pathlib.Path('recovered'); out.mkdir()
-          for i, sha in enumerate(shas):
-              req = urllib.request.Request(f'https://api.github.com/repos/{os.environ["GH_REPOSITORY"]}/git/blobs/{sha}', headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'], 'Accept':'application/vnd.github+json'})
-              with urllib.request.urlopen(req, timeout=30) as response:
-                  data = base64.b64decode(json.load(response)['content'])
-              assert hashlib.sha1(f'blob {len(data)}\0'.encode()+data).hexdigest() == sha
-              (out/f'{i:03}.bin').write_bytes(data)
-              print(i, len(data), sha)
+          import hashlib, pathlib, urllib.request
+          with urllib.request.urlopen('https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken', timeout=60) as r:
+              b = r.read()
+          pathlib.Path('transfer-table.txt').write_bytes(b)
+          print('Dictionary SHA256:', hashlib.sha256(b).hexdigest())
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: recovered-source-objects
-          path: recovered
+          name: source-transfer-table
+          path: transfer-table.txt
           retention-days: 1
