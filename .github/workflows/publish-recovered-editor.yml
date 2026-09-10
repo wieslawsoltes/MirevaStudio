@@ -1,0 +1,145 @@
+name: Recover and publish editor
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-recovered-editor.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Recover checksum-verified complete archive members
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, io, json, lzma, os, pathlib, tarfile, urllib.request
+          shas = ['c175778131785ec61eae3899371bc34cd65f4e6c','2a24e2979f1c383f48e58e71957546b079be24c2','918eb4c98ad27cdc4bc1e5e85160aa0c176ca3b6','2e1ffc2d113d898b088dd68a4f10dae8a58f9540','7be6ea1d3ccb5fc992a1a6404fd30ae6cda4ce03','bf9c81a48c76f1801e6119be20a2903126ff9a76','5e2df1353a353f53931c84f736f4df4add91ee5a','1bb94f4579f94672e438e02451d8d5779a0a9db4','547959ede13632c2582f6e1f7c864f9fb66c70a8','6d601b30ac6dc1899d0ce58c936cc182865a5949','e5c60816de0cf00120b738e8a20cdd2e4612d15b','e47c432d8d08dbeb290265b72fff1d88d4c3c998']
+          patches = {2: [(2390,2391,''),(10924,10924,'=')],7: [(5506,5508,'kB'),(5510,5511,'8')]}
+          expected = {2:'077ef0ec6a06fd4632c3cfb767a3f52b552ccfd7',7:'8518a23385ba72220ad16910bd9f4e9943b989d0'}
+          def blob_hash(data):
+              return hashlib.sha1(f'blob {len(data)}\0'.encode()+data).hexdigest()
+          blocks = []
+          for i, sha in enumerate(shas):
+              req = urllib.request.Request(f'https://api.github.com/repos/{os.environ["GH_REPOSITORY"]}/git/blobs/{sha}',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+              with urllib.request.urlopen(req,timeout=30) as response:
+                  data = base64.b64decode(json.load(response)['content'])
+              assert blob_hash(data) == sha, f'Corrupted remote object {i}'
+              if i in patches:
+                  text = base64.b64encode(data).decode()
+                  for start,end,replacement in sorted(patches[i],reverse=True):
+                      text = text[:start]+replacement+text[end:]
+                  data = base64.b64decode(text,validate=True)
+                  assert blob_hash(data) == expected[i], f'Invalid repaired object {i}'
+              assert len(data) == 8192
+              blocks.append(data)
+          # All source bytes consumed here are authenticated by the individually
+          # pinned Git object checksums. Do not execute partial archive members.
+          expanded = lzma.LZMADecompressor().decompress(b''.join(blocks))
+          stream = io.BytesIO(expanded)
+          recovered = []
+          with tarfile.open(fileobj=stream,mode='r:') as archive:
+              while True:
+                  try:
+                      item = archive.next()
+                  except (tarfile.ReadError,EOFError):
+                      break
+                  if item is None:
+                      break
+                  if item.offset_data + item.size > len(expanded):
+                      break
+                  if not item.isfile():
+                      continue
+                  path = pathlib.PurePosixPath(item.name)
+                  if path.is_absolute() or '..' in path.parts:
+                      raise ValueError('Unsafe archive member')
+                  parts = list(path.parts)
+                  if parts and parts[0] == 'mireva-studio':
+                      parts = parts[1:]
+                  if not parts or parts[0] in ('.github','.git','.mireva-data') or parts[-1] == '.env':
+                      continue
+                  target = pathlib.Path(*parts)
+                  content = archive.extractfile(item).read()
+                  assert len(content) == item.size
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  target.write_bytes(content)
+                  recovered.append(str(target))
+          html = pathlib.Path('dist/index.html')
+          assert html.exists() and html.stat().st_size > 300000, 'Complete editor was not recovered; nothing will be published'
+          assert '__MIREVA_READY__' in html.read_text()
+          pathlib.Path('dist/.nojekyll').touch()
+          pathlib.Path('test-artifacts').mkdir(exist_ok=True)
+          pathlib.Path('test-artifacts/recovered-files.json').write_text(json.dumps(recovered,indent=2))
+          print('Complete verified members recovered:',len(recovered))
+          print('\n'.join(recovered))
+          PY
+      - name: Verify editor in Chromium
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+          python - <<'PY'
+          import functools, http.server, pathlib, threading
+          from playwright.sync_api import sync_playwright
+          server=http.server.ThreadingHTTPServer(('127.0.0.1',4173),functools.partial(http.server.SimpleHTTPRequestHandler,directory='dist'))
+          threading.Thread(target=server.serve_forever,daemon=True).start()
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              page=browser.new_page(viewport={'width':1440,'height':900})
+              errors=[]
+              page.on('pageerror',lambda error:errors.append(str(error)))
+              response=page.goto('http://127.0.0.1:4173/',wait_until='networkidle')
+              assert response.status == 200
+              page.wait_for_function('window.__MIREVA_READY__ === true',timeout=30000)
+              assert page.locator('canvas').count() >= 1
+              assert not errors,errors
+              pathlib.Path('docs/images').mkdir(parents=True,exist_ok=True)
+              page.screenshot(path='docs/images/editor-pages.png')
+              print('PASS: editor initialized with canvas and no JavaScript exceptions')
+              browser.close()
+          server.shutdown()
+          PY
+      - name: Commit recovered complete source files
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --all -- . ':!.github' ':!test-artifacts'
+          git add -f dist/index.html dist/.nojekyll
+          if ! git diff --cached --quiet; then
+            git commit -m 'Recover Mireva Studio 0.2.0 editor and complete source archive members'
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: recovered-editor-verification
+          path: |
+            docs/images/editor-pages.png
+            test-artifacts/recovered-files.json
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: recover
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
