@@ -1,0 +1,10 @@
+.mireva-data/
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+__pycache__/
+
+test-artifacts/
+__pycache__/
