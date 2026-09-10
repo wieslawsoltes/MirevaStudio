@@ -1,0 +1,18 @@
+{
+  "executed": "2026-09-10",
+  "commands": [
+    "server/admin.mjs backup <new-backup-path>",
+    "server/admin.mjs restore <backup-path> <empty-target-directory> <key-file>"
+  ],
+  "backup": {
+    "online": true,
+    "integrity": "ok"
+  },
+  "restore": {
+    "integrity": "ok",
+    "documents": 7,
+    "journal": 36,
+    "audit": "valid"
+  },
+  "note": "Paths sanitized. Backup, keys, mail and runtime databases are intentionally excluded from the source release."
+}

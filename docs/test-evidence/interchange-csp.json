@@ -1,0 +1,39 @@
+[
+  {
+    "test": "Nonce CSP blocks injected inline script while application modules load",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "SVG file input imports nested transforms, cubic paths, clips, gradient stops and mixed typography without executing scripts",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Editable SVG metadata round-trips mixed text and vector scene; exported XML is well-formed",
+    "passed": true,
+    "details": {
+      "xml": true,
+      "editable": true,
+      "count": 111,
+      "bold": true,
+      "html": true,
+      "path": 30
+    }
+  },
+  {
+    "test": "Public design REST JSON imports through native file input",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Portable ZIP exports and reopens the editable full project",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "No unhandled browser errors",
+    "passed": true,
+    "details": []
+  }
+]

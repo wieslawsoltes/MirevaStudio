@@ -1,0 +1,62 @@
+[
+  {
+    "test": "Registration, delivered verification link and cookie-session sign-in under normal CSP",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Organization creation and account-owned project persistence with authenticated SSE",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "People UI sends email-bound invitation and displays real member roles",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Organization policy changes persist through permission-checked API",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Shared library publishes editable design and palette payloads",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Audit UI validates persisted event chain",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Account profile and active session management are connected",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Public prototype snapshot runs without account access",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Native contenteditable formatting emits character CRDT operations",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Boolean worker union and anchor smoothing through inspector controls",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "B\u00e9zier pen creates editable curved geometry by pointer gestures",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "No unhandled browser errors",
+    "passed": true,
+    "details": []
+  }
+]

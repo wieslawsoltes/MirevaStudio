@@ -1,0 +1,85 @@
+[
+  {
+    "test": "Canvas startup",
+    "passed": true,
+    "details": "Canvas 2D"
+  },
+  {
+    "test": "Insert, inspector editing, nudge, undo/redo, side-grip resizing, duplicate and delete",
+    "passed": true,
+    "details": {
+      "id": "n_25a34a486b004f8898b013a97c408433",
+      "width": 299.31044835261923
+    }
+  },
+  {
+    "test": "Inline text editing",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Icon search, virtualized layers and local prompt composition",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "PNG, SVG, editable document and interactive HTML downloads",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "HTML prototype navigation in sandboxed preview",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "IndexedDB autosave survives reload",
+    "passed": true,
+    "details": null
+  },
+  {
+    "test": "Two-client collaboration, presence, offline recovery, comments and viewer gate",
+    "passed": true,
+    "details": {
+      "room": "af77144f27a301240f61855b",
+      "twoWay": true,
+      "offlineRecovery": true,
+      "viewerProtected": true
+    }
+  },
+  {
+    "test": "Responsive mobile viewport and dark appearance",
+    "passed": true,
+    "details": {
+      "width": 390,
+      "viewport": 390
+    }
+  },
+  {
+    "test": "WebGPU validated pipeline and scene submission",
+    "passed": true,
+    "details": {
+      "mode": "WebGPU",
+      "reason": null,
+      "stats": {
+        "instances": 116,
+        "drawCalls": 1,
+        "atlasPages": 1,
+        "visible": 106,
+        "total": 106,
+        "ms": 1
+      }
+    },
+    "errors": []
+  },
+  {
+    "test": "Device-loss fallback preserves editing",
+    "passed": true,
+    "details": 106
+  },
+  {
+    "test": "No unhandled application JavaScript errors",
+    "passed": true,
+    "errors": []
+  }
+]

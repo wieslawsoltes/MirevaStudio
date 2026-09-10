@@ -1,0 +1,28 @@
+[
+  {
+    "mode": "HTTP",
+    "passed": true,
+    "checks": [
+      "startup",
+      "insert",
+      "atomic undo",
+      "prototype script",
+      "navigation",
+      "autosave/reload",
+      "no JS errors"
+    ]
+  },
+  {
+    "mode": "file",
+    "passed": true,
+    "checks": [
+      "startup",
+      "insert",
+      "atomic undo",
+      "prototype script",
+      "navigation",
+      "autosave/reload",
+      "no JS errors"
+    ]
+  }
+]

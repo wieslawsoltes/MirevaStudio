@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#7560d5"><meta name="description" content="Mireva Studio — a local-first collaborative design and prototyping workspace.">
+<title>Mireva Studio · Design something wonderful</title>
+<link rel="icon" type="image/svg+xml" href="assets/mark.svg"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+ <header class="topbar">
+  <button class="brand" data-cmd="projects" title="Mireva Studio · Your projects" aria-label="Open your projects"><svg viewBox="0 0 32 32" width="29" height="29" fill="none"><path d="M5 23V11a4 4 0 0 1 7-2.6L16 13l4-4.6a4 4 0 0 1 7 2.6v12" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m11 23 5-6 5 6" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="project-header"><button class="project-title" id="project-name" data-cmd="rename-project">Serein · Wellness app</button><span class="save-state" id="save-state"><i></i> Saved to this device</span></div>
+  <div class="mode-switch" aria-label="Workspace mode"><button data-mode="design" class="active">Design</button><button data-mode="prototype">Interact</button><button data-mode="handoff">Handoff</button></div>
+  <div class="top-spacer"></div>
+  <div class="history-actions"><button class="icon-button" data-cmd="undo" title="Undo · Ctrl Z" aria-label="Undo" data-icon="undo"></button><button class="icon-button" data-cmd="redo" title="Redo · Ctrl Shift Z" aria-label="Redo" data-icon="redo"></button></div>
+  <button class="button account-button" data-cmd="workspace" title="Accounts and organizations"><span data-icon="user"></span><span id="account-label">Workspace</span></button>
+  <button class="presence-cluster" id="presence-cluster" data-cmd="share" aria-label="Workspace collaborators"><span class="avatar">Y</span></button>
+  <button class="button share-button" data-cmd="share"><span data-icon="share"></span><span>Share</span></button>
+  <button class="icon-button export-top" data-cmd="export" title="Export design" aria-label="Export" data-icon="download"></button>
+  <button class="button primary preview-button" data-cmd="preview"><span data-icon="play"></span><span>Preview</span></button>
+ </header>
+ <main class="workbench">
+  <nav class="tool-rail" aria-label="Design library">
+   <button class="rail-add" data-cmd="new-screen" title="Add a screen"><span data-icon="plus"></span><span>Screen</span></button>
+   <button data-panel="templates"><span data-icon="layout"></span><span>Templates</span></button>
+   <button data-panel="shapes"><span data-icon="rectangle"></span><span>Shapes</span></button>
+   <button data-panel="text"><span data-icon="text"></span><span>Text</span></button>
+   <button data-panel="media"><span data-icon="image"></span><span>Images</span></button>
+   <button data-panel="icons"><span data-icon="star"></span><span>Icons</span></button>
+   <button data-panel="components" class="active"><span data-icon="component"></span><span>Elements</span></button>
+   <button data-panel="themes"><span data-icon="palette"></span><span>Brand</span></button>
+   <div class="rail-rule"></div>
+   <button data-panel="compose" class="composer-rail"><span data-icon="sparkle"></span><span>Compose</span></button>
+   <div class="rail-spacer"></div>
+   <button data-panel="layers"><span data-icon="layers"></span><span>Layers</span></button>
+   <button data-cmd="help"><span data-icon="help"></span><span>Help</span></button>
+  </nav>
+  <aside id="library" class="library" aria-label="Components and layers"></aside>
+  <section class="workspace" aria-label="Design workspace">
+   <div class="canvas-header"><button class="canvas-crumb" data-panel="screens"><span data-icon="phone"></span><span id="canvas-description">Mobile app</span><span class="crumb-divider">/</span><span id="screen-count">3 screens</span></button><div class="canvas-header-right"><button class="quiet-button" data-cmd="wireframe" id="wireframe-button"><span data-icon="layers"></span>Wireframe</button><button class="icon-button" data-cmd="comments" title="Comments" aria-label="Comments" data-icon="comment"></button><button class="icon-button mobile-properties" data-cmd="toggle-inspector" aria-label="Toggle properties" data-icon="settings"></button></div></div>
+   <div id="canvas-host" class="canvas-host" tabindex="0"></div>
+   <div id="floating-tools" class="floating-tools" role="toolbar" aria-label="Drawing tools"></div>
+   <div class="zoom-bar"><button data-cmd="zoom-out" title="Zoom out" aria-label="Zoom out" data-icon="minus"></button><button id="zoom-value" data-cmd="zoom-menu">70%</button><button data-cmd="zoom-in" title="Zoom in" aria-label="Zoom in" data-icon="plus"></button><i></i><button data-cmd="fit" title="Fit all · Shift 1" aria-label="Fit all screens" data-icon="fit"></button></div>
+   <button class="canvas-help" data-cmd="command-palette" title="Find a command · Ctrl K"><span data-icon="search"></span><span>Quick actions</span><kbd>⌘ K</kbd></button>
+   <div class="empty-canvas" id="empty-canvas" hidden><div class="empty-mark">✧</div><h2>Every great idea starts here.</h2><p>Add a screen, choose a template, or compose your first design.</p><button class="button primary" data-cmd="new-screen">Create a screen</button></div>
+  </section>
+  <aside class="inspector" id="inspector" aria-label="Design properties"></aside>
+ </main>
+ <footer class="statusbar"><span class="renderer-badge" id="renderer-status"><i></i> Starting renderer</span><span id="render-stats"></span><span class="status-spacer"></span><button data-cmd="history"><span data-icon="clock"></span>Version history</button><span class="status-divider"></span><span id="connection-status">Local workspace</span><button data-cmd="settings" class="status-settings" title="Settings" aria-label="Settings" data-icon="settings"></button></footer>
+</div>
+<input type="file" id="file-input" hidden accept=".mireva,.json,.svg,image/png,image/jpeg,image/webp,image/gif">
+<dialog id="modal" class="modal"><div id="modal-content"></div></dialog>
+<dialog id="preview-dialog" class="preview-dialog"><header><span class="preview-brand">mireva <b>Preview</b></span><span id="preview-title"></span><button class="button" data-cmd="export-html"><span data-icon="download"></span>Export prototype</button><button class="icon-button" data-cmd="close-preview" aria-label="Close preview" data-icon="close"></button></header><iframe id="prototype-frame" title="Interactive prototype" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"></iframe></dialog>
+<div class="context-menu" id="context-menu" role="menu" hidden></div>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+<script type="module" src="src/app.js"></script>
+</body>
+</html>

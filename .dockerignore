@@ -1,0 +1,5 @@
+.mireva-data
+node_modules
+.git
+.env
+*.log

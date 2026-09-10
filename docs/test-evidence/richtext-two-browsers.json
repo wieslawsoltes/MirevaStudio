@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "convergedText": "BABA",
+  "checks": [
+    "two native contenteditable sessions",
+    "both browsers offline",
+    "concurrent insertions at different positions",
+    "concurrent character formatting",
+    "durable queue replay",
+    "same materialized text and atom state",
+    "caret anchor preserved",
+    "selective undo replicated without losing peer edits",
+    "no unhandled browser errors"
+  ]
+}

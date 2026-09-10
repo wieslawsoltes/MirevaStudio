@@ -1,0 +1,374 @@
+
+> mireva-studio@0.2.0 check
+> node scripts/check.mjs
+
+Syntax OK: 46 JavaScript modules.
+
+> mireva-studio@0.2.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: validation rejects unsafe resources, nonfinite numbers and unknown fields
+ok 1 - validation rejects unsafe resources, nonfinite numbers and unknown fields
+  ---
+  duration_ms: 1.513233
+  type: 'test'
+  ...
+# Subtest: seed is a validated three-screen editable prototype
+ok 2 - seed is a validated three-screen editable prototype
+  ---
+  duration_ms: 47.227659
+  type: 'test'
+  ...
+# Subtest: concurrent independent properties and same-property ties converge
+ok 3 - concurrent independent properties and same-property ties converge
+  ---
+  duration_ms: 2.02385
+  type: 'test'
+  ...
+# Subtest: transactions roll back all mutations on validation failure
+ok 4 - transactions roll back all mutations on validation failure
+  ---
+  duration_ms: 0.9325
+  type: 'test'
+  ...
+# Subtest: local parent cycles are rejected
+ok 5 - local parent cycles are rejected
+  ---
+  duration_ms: 0.551007
+  type: 'test'
+  ...
+# Subtest: selective undo preserves a newer remote edit and undoes independent fields
+ok 6 - selective undo preserves a newer remote edit and undoes independent fields
+  ---
+  duration_ms: 0.885871
+  type: 'test'
+  ...
+# Subtest: creation undo and redo restore an element without duplicating IDs
+ok 7 - creation undo and redo restore an element without duplicating IDs
+  ---
+  duration_ms: 0.960022
+  type: 'test'
+  ...
+# Subtest: deletion uses tombstones and survives delayed edits
+ok 8 - deletion uses tombstones and survives delayed edits
+  ---
+  duration_ms: 0.610628
+  type: 'test'
+  ...
+# Subtest: geometry inverse and rotated hit testing
+ok 9 - geometry inverse and rotated hit testing
+  ---
+  duration_ms: 1.963259
+  type: 'test'
+  ...
+# Subtest: clipping, hidden and locked inheritance affect hit testing
+ok 10 - clipping, hidden and locked inheritance affect hit testing
+  ---
+  duration_ms: 1.342918
+  type: 'test'
+  ...
+# Subtest: duplicate remaps subtree references
+ok 11 - duplicate remaps subtree references
+  ---
+  duration_ms: 1.038941
+  type: 'test'
+  ...
+# Subtest: group and ungroup preserve world positions
+ok 12 - group and ungroup preserve world positions
+  ---
+  duration_ms: 11.368496
+  type: 'test'
+  ...
+# Subtest: responsive constraints and auto layout produce real geometry
+ok 13 - responsive constraints and auto layout produce real geometry
+  ---
+  duration_ms: 1.283167
+  type: 'test'
+  ...
+# Subtest: component instances propagate master style without moving instances
+ok 14 - component instances propagate master style without moving instances
+  ---
+  duration_ms: 1.560424
+  type: 'test'
+  ...
+# Subtest: all template and component families produce valid data
+ok 15 - all template and component families produce valid data
+  ---
+  duration_ms: 254.850441
+  type: 'test'
+  ...
+# Subtest: large snapshot loading does not overflow the argument stack
+ok 16 - large snapshot loading does not overflow the argument stack
+  ---
+  duration_ms: 349.051391
+  type: 'test'
+  ...
+# Subtest: alignment, distribution and snapping use document coordinates
+ok 17 - alignment, distribution and snapping use document coordinates
+  ---
+  duration_ms: 1.371059
+  type: 'test'
+  ...
+# Subtest: recursive group scaling uses pre-edit dimensions at every depth
+ok 18 - recursive group scaling uses pre-edit dimensions at every depth
+  ---
+  duration_ms: 0.443587
+  type: 'test'
+  ...
+# Subtest: portable ZIP preserves complete native document, Unicode and rich text
+ok 19 - portable ZIP preserves complete native document, Unicode and rich text
+  ---
+  duration_ms: 9.082122
+  type: 'test'
+  ...
+# Subtest: ZIP accepts bounded deflate and rejects CRC damage, expansion bombs and unsafe paths
+ok 20 - ZIP accepts bounded deflate and rejects CRC damage, expansion bombs and unsafe paths
+  ---
+  duration_ms: 41.729781
+  type: 'test'
+  ...
+# Subtest: public REST JSON imports nested transforms, curved paths and mixed text with stable remapping
+ok 21 - public REST JSON imports nested transforms, curved paths and mixed text with stable remapping
+  ---
+  duration_ms: 14.524907
+  type: 'test'
+  ...
+# Subtest: documented Sketch ZIP imports pages, attributed text, paths and embedded raster assets
+ok 22 - documented Sketch ZIP imports pages, attributed text, paths and embedded raster assets
+  ---
+  duration_ms: 2.374106
+  type: 'test'
+  ...
+# Subtest: checkpoint restoration creates new character edits rather than unioning old text histories
+ok 23 - checkpoint restoration creates new character edits rather than unioning old text histories
+  ---
+  duration_ms: 4.665348
+  type: 'test'
+  ...
+# Subtest: schema rejects CSS payloads, invalid colors and overdeep trees
+ok 24 - schema rejects CSS payloads, invalid colors and overdeep trees
+  ---
+  duration_ms: 42.930474
+  type: 'test'
+  ...
+# Subtest: separate OS processes exchange live journal edits, deduplicate retries and recover acknowledged writes after SIGKILL
+ok 25 - separate OS processes exchange live journal edits, deduplicate retries and recover acknowledged writes after SIGKILL
+  ---
+  duration_ms: 661.082285
+  type: 'test'
+  ...
+# Two independently spawned Node processes; 18 acknowledged transactions; abrupt SIGKILL of both and WAL restart.
+# (node:9156) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: verified accounts, CSRF, password reset, MFA and revocable sessions
+ok 26 - verified accounts, CSRF, password reset, MFA and revocable sessions
+  ---
+  duration_ms: 468.32619
+  type: 'test'
+  ...
+# Subtest: organization invitations are email-bound; roles, policy, project access and audit enforced
+ok 27 - organization invitations are email-bound; roles, policy, project access and audit enforced
+  ---
+  duration_ms: 347.297938
+  type: 'test'
+  ...
+# Subtest: encrypted journal, duplicate receipts, compaction, multi-process synchronization and backup
+ok 28 - encrypted journal, duplicate receipts, compaction, multi-process synchronization and backup
+  ---
+  duration_ms: 286.099644
+  type: 'test'
+  ...
+# Subtest: OIDC code+PKCE flow verifies signatures, nonce, audience, verified email, expiry and single-use state
+ok 29 - OIDC code+PKCE flow verifies signatures, nonce, audience, verified email, expiry and single-use state
+  ---
+  duration_ms: 380.47677
+  type: 'test'
+  ...
+# {"level":"error","requestId":"e2f6ca0e2200d786d7e6b554","status":502,"message":"The model returned an invalid parent"}
+# Subtest: AI requests exercise real HTTP transports, image input, validation, retry, cancellation, budgets and persistent history
+ok 30 - AI requests exercise real HTTP transports, image input, validation, retry, cancellation, budgets and persistent history
+  ---
+  duration_ms: 528.802759
+  type: 'test'
+  ...
+# Subtest: SMTP transport delivers MIME and refuses unencrypted production-style credentials
+ok 31 - SMTP transport delivers MIME and refuses unencrypted production-style credentials
+  ---
+  duration_ms: 8.111584
+  type: 'test'
+  ...
+# Subtest: concurrent character insertions preserve both runs and converge
+ok 32 - concurrent character insertions preserve both runs and converge
+  ---
+  duration_ms: 7.212995
+  type: 'test'
+  ...
+# Subtest: out-of-order character deletion and formatting converge
+ok 33 - out-of-order character deletion and formatting converge
+  ---
+  duration_ms: 2.358302
+  type: 'test'
+  ...
+# Subtest: concurrent range emphasis merges independent marks
+ok 34 - concurrent range emphasis merges independent marks
+  ---
+  duration_ms: 10.036235
+  type: 'test'
+  ...
+# Subtest: selective text undo never deletes a concurrent insertion and supports redo
+ok 35 - selective text undo never deletes a concurrent insertion and supports redo
+  ---
+  duration_ms: 2.413175
+  type: 'test'
+  ...
+# Subtest: text deletion, Unicode, mark undo, snapshot merge and ordinary set use character ops
+ok 36 - text deletion, Unicode, mark undo, snapshot merge and ordinary set use character ops
+  ---
+  duration_ms: 3.183232
+  type: 'test'
+  ...
+# Subtest: failed multi-operation receive and transactions are atomic
+ok 37 - failed multi-operation receive and transactions are atomic
+  ---
+  duration_ms: 0.634253
+  type: 'test'
+  ...
+# Subtest: concurrent reparenting projects to the same visible, cycle-free tree
+ok 38 - concurrent reparenting projects to the same visible, cycle-free tree
+  ---
+  duration_ms: 1.132902
+  type: 'test'
+  ...
+# (node:9193) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: persistent multi-user collaboration, permissions, SSE and revocation
+    # Subtest: room credentials and creation key are enforced
+    ok 1 - room credentials and creation key are enforced
+      ---
+      duration_ms: 12.980998
+      type: 'test'
+      ...
+    # Subtest: viewers cannot change documents or grant access
+    ok 2 - viewers cannot change documents or grant access
+      ---
+      duration_ms: 6.782532
+      type: 'test'
+      ...
+    # Subtest: parallel edits merge and the server serializes persistence
+    ok 3 - parallel edits merge and the server serializes persistence
+      ---
+      duration_ms: 13.186376
+      type: 'test'
+      ...
+    # Subtest: SSE sends a snapshot then actual committed edits
+    ok 4 - SSE sends a snapshot then actual committed edits
+      ---
+      duration_ms: 7.668644
+      type: 'test'
+      ...
+    # Subtest: commenter may create and resolve own threads but not edit design
+    ok 5 - commenter may create and resolve own threads but not edit design
+      ---
+      duration_ms: 10.527603
+      type: 'test'
+      ...
+    # Subtest: invalid operations are atomic and unsafe resources are rejected
+    ok 6 - invalid operations are atomic and unsafe resources are rejected
+      ---
+      duration_ms: 3.607909
+      type: 'test'
+      ...
+    # Subtest: shared version checkpoints preserve document state
+    ok 7 - shared version checkpoints preserve document state
+      ---
+      duration_ms: 3.660148
+      type: 'test'
+      ...
+    # Subtest: invitation revocation is effective immediately
+    ok 8 - invitation revocation is effective immediately
+      ---
+      duration_ms: 3.988341
+      type: 'test'
+      ...
+# {"level":"error","requestId":"6cdb48bec70892f19e02feaf","status":503,"message":"No model configured. Configure AI_PROVIDERS or AI_URL and AI_MODEL on the server."}
+    # Subtest: private server files, hostile origins and missing AI configuration fail closed
+    ok 9 - private server files, hostile origins and missing AI configuration fail closed
+      ---
+      duration_ms: 4.94002
+      type: 'test'
+      ...
+    # Subtest: server restart restores edits, grants, revocations and versions
+    ok 10 - server restart restores edits, grants, revocations and versions
+      ---
+      duration_ms: 19.451888
+      type: 'test'
+      ...
+    1..10
+ok 39 - persistent multi-user collaboration, permissions, SSE and revocation
+  ---
+  duration_ms: 144.557349
+  type: 'test'
+  ...
+# Subtest: SVG path parser normalizes relative, smooth, quadratic, horizontal and arc commands
+ok 40 - SVG path parser normalizes relative, smooth, quadratic, horizontal and arc commands
+  ---
+  duration_ms: 3.371234
+  type: 'test'
+  ...
+# Subtest: cubic bounds find interior extrema and De Casteljau splitting preserves the curve
+ok 41 - cubic bounds find interior extrema and De Casteljau splitting preserves the curve
+  ---
+  duration_ms: 1.05873
+  type: 'test'
+  ...
+# Subtest: overlapping rectangle Boolean union, intersection, subtraction and XOR
+ok 42 - overlapping rectangle Boolean union, intersection, subtraction and XOR
+  ---
+  duration_ms: 4.1873
+  type: 'test'
+  ...
+# Subtest: nested subtraction creates a real hole and identical XOR is empty
+ok 43 - nested subtraction creates a real hole and identical XOR is empty
+  ---
+  duration_ms: 1.29801
+  type: 'test'
+  ...
+# Subtest: touching edges, disjoint islands, shared corners and concave polygons
+ok 44 - touching edges, disjoint islands, shared corners and concave polygons
+  ---
+  duration_ms: 1.689578
+  type: 'test'
+  ...
+# Subtest: curved operands retain an explicit tessellation tolerance
+ok 45 - curved operands retain an explicit tessellation tolerance
+  ---
+  duration_ms: 12.194146
+  type: 'test'
+  ...
+# Subtest: resize and normalization preserve negative path coordinates and rotation
+ok 46 - resize and normalization preserve negative path coordinates and rotation
+  ---
+  duration_ms: 0.575785
+  type: 'test'
+  ...
+# Subtest: random axis-aligned rectangles agree with analytic overlap areas
+ok 47 - random axis-aligned rectangles agree with analytic overlap areas
+  ---
+  duration_ms: 48.628012
+  type: 'test'
+  ...
+1..47
+# tests 57
+# suites 0
+# pass 57
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10629.127374
+
+> mireva-studio@0.2.0 build
+> node scripts/build.mjs
+
+Built 25 modules → mireva-studio.html (384 KiB).

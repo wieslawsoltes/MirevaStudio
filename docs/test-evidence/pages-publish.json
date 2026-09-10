@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "groups": 6,
+  "checks": [
+    "Project-subpath startup with 106 editable sample objects",
+    "Component insertion and atomic undo",
+    "Server-services notice without requests to GitHub Pages account APIs",
+    "Interactive prototype navigation",
+    "IndexedDB saves persist after reload",
+    "Build metadata, .nojekyll and no unhandled JavaScript errors"
+  ]
+}

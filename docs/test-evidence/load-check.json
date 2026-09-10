@@ -1,0 +1,19 @@
+{
+  "scope": "Synthetic loopback HTTP check, single local Node process, no external traffic, not a capacity guarantee",
+  "node": "v22.16.0",
+  "platform": "linux",
+  "cpus": 5,
+  "records": 1001,
+  "concurrentWriters": 8,
+  "acknowledgedBatches": 240,
+  "failures": 0,
+  "elapsedMs": 426.8,
+  "batchesPerSecond": 562.3,
+  "latencyMs": {
+    "p50": 9.27,
+    "p95": 47.28,
+    "max": 82.16
+  },
+  "rssDeltaMB": 40,
+  "verifiedFinalRevision": 240
+}

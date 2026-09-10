@@ -8,3 +8,9 @@ __pycache__/
 
 test-artifacts/
 __pycache__/
+
+# Reproducible standalone build
+/mireva-studio.html
+
+# Retain intentional verification evidence
+!docs/test-evidence/*.log
