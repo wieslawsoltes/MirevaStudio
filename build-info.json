@@ -1,0 +1,7 @@
+{
+  "name": "mireva-studio",
+  "version": "0.2.0",
+  "commit": "7780cd8e9f0526a83e2be0ea63a48a5fb1aa8acb",
+  "hosting": "static",
+  "serverServices": false
+}
